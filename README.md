@@ -121,4 +121,6 @@ This project is licensed under the MIT License.
 
 Made with ❤️ using **React + Vite**
 
-# Mamata Fan
+# joi bangla
+# lal selam
+# jai sree ram
