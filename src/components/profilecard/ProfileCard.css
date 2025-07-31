@@ -1,5 +1,11 @@
 /* ProfileCard.css */
 
+
+#bapanmondal {
+  filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+
 .profile-container {
   width: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -8,7 +14,7 @@
 }
 
 .profile-card {
-  background: rgba(51, 42, 42, 0.95);
+  background: rgb(0 0 0 / 95%);
   backdrop-filter: blur(20px);
   border-radius: 0;
   box-shadow: 
@@ -169,7 +175,7 @@
     0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
-.image-frame {
+/* .image-frame {
   position: absolute;
   top: -12px;
   left: -12px;
@@ -183,7 +189,7 @@
   mask-composite: exclude;
   animation: rotateBorder 12s linear infinite;
   z-index: 1;
-}
+} */
 
 .glow-effect {
   position: absolute;

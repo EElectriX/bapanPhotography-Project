@@ -4,7 +4,7 @@ import './ProfileCard.css';
 const ProfileCard = ({ 
   name = "Bapan Mondal", 
   profession = "Photographer", 
-   imageUrl = "/bapanImage.jpg" 
+  //  imageUrl = "/bapanImageNoBack.png" 
 }) => {
   return (
     <div className="profile-container">
@@ -24,11 +24,15 @@ const ProfileCard = ({
           <div className="image-container">
             <div className="glow-effect"></div>
             <div className="image-frame"></div>
-            <img 
+            {/* <img 
               src={imageUrl} 
               alt={`${name} - ${profession}`}
               className="person-image"
-            />
+            /> */}
+
+    <div id="bapanmondal">
+      <img src="/bapanImageNoBack.png"  id="bapanimage" alt="Bapan Mondal Image with glow" />
+    </div>
           </div>
         </div>
       </div>
