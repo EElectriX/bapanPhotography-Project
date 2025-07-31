@@ -19,15 +19,20 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full bg-gray-900/70 backdrop-blur-md text-white z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        {/* Logo */}
           <div className="flex-shrink-0">
             <a href="#" className="flex items-center space-x-2">
-              <div className="bg-indigo-600 p-2 rounded-full">
-                <Code className="h-6 w-6 text-white" />
+              <div className="p-1 rounded-full overflow-hidden w-10 h-10">
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="bg-black w-full h-full object-cover rounded-full"
+                />
               </div>
               <span className="font-bold text-xl tracking-tight">BMPA</span>
             </a>
           </div>
+
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
