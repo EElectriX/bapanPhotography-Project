@@ -1,14 +1,13 @@
-import { useState } from 'react'
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfileCard from './components/profilecard/ProfileCard';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import ProfessionalFooter from './components/ProfessionalFooter';
 import LoadingPage from './components/LoadingPage';
 import './App.css'
-// import Hero from './components/Hero/Hero';
-// import Nav from './components/Nav/Nav';
-// import ThreeColumns from './components/ThreeColumns';
+
+
 function App() {
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,13 +35,34 @@ function App() {
 
       // </main>
 
-      <div className="m-0 p-0 overflow-x-hidden">
-     <Navbar />
+    //   <div className="m-0 p-0 overflow-x-hidden">
+    //  <Navbar />
+    //  <main>
+    //   <Routes>
+    //      <Route path='/' element={<HomePage />}/>
+    //   </Routes>
+    //  </main>
 
-     <HomePage />
-      <ProfessionalFooter />
-    </div>
+    //  <HomePage />
+    //   <ProfessionalFooter />
+    // </div>
     // </Router>
+      
+     <Router>
+      <div className="m-0 p-0 overflow-x-hidden">
+        <Navbar />
+
+        <main >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            {/* Add more routes like below as needed */}
+            <Route path="/About" element={<ProfileCard />} />
+          </Routes>
+        </main>
+
+        <ProfessionalFooter />
+      </div>
+    </Router>
   )
 }
 

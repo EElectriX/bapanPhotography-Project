@@ -48,7 +48,7 @@ const HorizontalImageScroll = () => {
 
   return (
   
-   <div className="w-full bg-black min-h-screen relative overflow-hidden py-16 pt-20 sm:pt-24 md:pt-32 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+   <div className=" bg-black min-h-screen relative overflow-hidden  py-10 px-5 md:px-20 ">
 
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl animate-pulse"></div>

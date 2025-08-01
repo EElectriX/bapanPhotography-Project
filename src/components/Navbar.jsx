@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Menu, X, Home, User, Settings, Mail, Code } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Home', icon: Home, href: '#' },
-  { name: 'About', icon: User, href: '#' },
-  { name: 'Services', icon: Settings, href: '#' },
-  { name: 'Contact', icon: Mail, href: '#' },
+  {id:1, name: 'Home', icon: Home, href: '/' },
+  {id:2, name: 'About', icon: User, href: '/about' },
+  {id:3, name: 'Services', icon: Settings, href: '/services' },
+  {id:4, name: 'Contact', icon: Mail, href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -19,9 +20,9 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full bg-gray-900/70 backdrop-blur-md text-white z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-        {/* Logo */}
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#" className="flex items-center space-x-2">
+            <div to="/" className="flex items-center space-x-2">
               <div className="p-1 rounded-full overflow-hidden w-10 h-10">
                 <img
                   src="/logo.png"
@@ -30,9 +31,8 @@ export default function Navbar() {
                 />
               </div>
               <span className="font-bold text-xl tracking-tight">BMPA</span>
-            </a>
+            </div>
           </div>
-
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
@@ -40,14 +40,20 @@ export default function Navbar() {
               {navItems.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  <NavLink
+                    key={item.id}
+                    to={item.href}
+                    className={({ isActive }) =>
+                      `flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+                        isActive
+                          ? 'bg-gray-800 text-white'
+                          : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                      }`
+                    }
                   >
                     <IconComponent className="h-5 w-5 mr-2" />
                     <span>{item.name}</span>
-                  </a>
+                  </NavLink>
                 );
               })}
             </div>
@@ -78,15 +84,21 @@ export default function Navbar() {
             {navItems.map((item) => {
               const IconComponent = item.icon;
               return (
-                <a
-                  key={item.name}
-                  href={item.href}
+                <NavLink
+                  key={item.id}
+                  to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                  className={({ isActive }) =>
+                    `flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                      isActive
+                        ? 'bg-gray-800 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    }`
+                  }
                 >
                   <IconComponent className="h-5 w-5 mr-3" />
                   <span>{item.name}</span>
-                </a>
+                </NavLink>
               );
             })}
           </div>
