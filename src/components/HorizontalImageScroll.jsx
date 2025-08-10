@@ -6,16 +6,17 @@ const HorizontalImageScroll = () => {
   const scrollRef = useRef(null);
 
   const images = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', alt: 'Mountain Vista' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=300&h=200&fit=crop', alt: 'Ocean Waves' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&h=200&fit=crop', alt: 'Starry Night' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&h=200&fit=crop', alt: 'Forest Path' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', alt: 'City Skyline' },
-    { id: 6, src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&h=200&fit=crop', alt: 'Desert Dunes' },
-    { id: 7, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', alt: 'Aurora Lights' },
-    { id: 8, src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=300&h=200&fit=crop', alt: 'Cosmic Nebula' },
-    { id: 9, src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', alt: 'Tropical Beach' },
-   
+    { id: 1, src: '/HorizontalImageScrollImages/image1.jpg', alt: 'Mountain Vista' },
+    { id: 2, src: '/HorizontalImageScrollImages/image2.jpg', alt: 'Ocean Waves' },
+    { id: 3, src: '/HorizontalImageScrollImages/image3.jpg', alt: 'Starry Night' },
+    { id: 4, src: '/HorizontalImageScrollImages/image4.jpg', alt: 'Forest Path' },
+    { id: 5, src: '/HorizontalImageScrollImages/image5.jpg', alt: 'City Skyline' },
+    { id: 6, src: '/HorizontalImageScrollImages/image6.jpg', alt: 'Desert Dunes' },
+    { id: 7, src: '/HorizontalImageScrollImages/image7.jpg', alt: 'Aurora Lights' },
+    { id: 8, src: '/HorizontalImageScrollImages/image8.jpg', alt: 'Cosmic Nebula' },
+    { id: 9, src: '/HorizontalImageScrollImages/image9.jpg', alt: 'Tropical Beach' },
+    { id: 10, src: '/HorizontalImageScrollImages/image10.jpg', alt: 'Mountain and tress' },
+
   ];
 
   const duplicatedImages = [...images, ...images];

@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import ProfessionalFooter from './components/ProfessionalFooter';
 import LoadingPage from './components/LoadingPage';
+import Services from './components/Services';
 import './App.css'
 
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             {/* Add more routes like below as needed */}
             <Route path="/About" element={<ProfileCard />} />
+            <Route path="/Services" element={<Services />} />
           </Routes>
         </main>
 
