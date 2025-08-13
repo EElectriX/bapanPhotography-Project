@@ -6,7 +6,8 @@ const navItems = [
   {id:1, name: 'Home', icon: Home, href: '/' },
   {id:2, name: 'About', icon: User, href: '/about' },
   {id:3, name: 'Services', icon: Settings, href: '/services' },
-  {id:4, name: 'Contact', icon: Mail, href: '/contact' },
+  {id:4, name: 'Classes', icon: Settings, href: '/classes' },
+  {id:5, name: 'Contact', icon: Mail, href: '/contact' },
 ];
 
 export default function Navbar() {
