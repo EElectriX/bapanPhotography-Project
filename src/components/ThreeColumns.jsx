@@ -5,7 +5,7 @@ const sections = [
     title: "My Courses",
     subtitle: "Products & Solutions",
     image: "/ThreeColumnsImages/image1.jpg",
-    link: "#",
+    link: "Classes",
   },
   {
     id : 2,

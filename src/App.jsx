@@ -7,6 +7,7 @@ import ProfessionalFooter from './components/ProfessionalFooter';
 import LoadingPage from './components/LoadingPage';
 import Services from './components/Services';
 import ContactPage from './components/ContactPage';
+import Classes from './components/Classes';
 import './App.css'
 
 
@@ -60,6 +61,7 @@ function App() {
             {/* Add more routes like below as needed */}
             <Route path="/About" element={<ProfileCard />} />
             <Route path="/Services" element={<Services />} />
+            <Route path="/Classes" element={<Classes />} />
             <Route path="/Contact" element={<ContactPage />} />
           </Routes>
         </main>

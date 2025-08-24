@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Menu, X, Home, User, Settings, Mail, Code } from 'lucide-react';
+import { Menu, X, Home, User, Settings, Mail, GraduationCap } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const navItems = [
   {id:1, name: 'Home', icon: Home, href: '/' },
   {id:2, name: 'About', icon: User, href: '/about' },
   {id:3, name: 'Services', icon: Settings, href: '/services' },
-  {id:4, name: 'Classes', icon: Settings, href: '/classes' },
+  {id:4, name: 'Classes', icon: GraduationCap, href: '/classes' },
   {id:5, name: 'Contact', icon: Mail, href: '/contact' },
 ];
 

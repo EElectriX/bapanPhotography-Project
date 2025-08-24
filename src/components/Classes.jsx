@@ -1,9 +1,10 @@
 import React from 'react';
-import HorizontalSlideBar from './HorizontalSlideBar';
+// import HorizontalSlideBar from './HorizontalSlideBar';
 // import HeroServices from './HeroServices';
 import ContactPage from './ContactPage';
 import PricingTable from './PricingTable';
-const Services = () => {
+import MobileScrollFadeGallery from './MobileScrollFadeGallery';
+const Classes = () => {
 
     const planData = [
     {
@@ -67,13 +68,14 @@ const Services = () => {
             <main className="m-0 p-0">
                 
                 {/* <HeroServices /> */}
+                <MobileScrollFadeGallery />
 
-                <HorizontalSlideBar />
                 <PricingTable plans={planData} />
                 <ContactPage />
+
             </main>
         </div>
     );
 };
 
-export default Services;
+export default Classes;
