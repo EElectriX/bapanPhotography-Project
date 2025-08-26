@@ -4,6 +4,8 @@ import React from 'react';
 import ContactPage from './ContactPage';
 import PricingTable from './PricingTable';
 import MobileScrollFadeGallery from './MobileScrollFadeGallery';
+import UserReviews from './UserReviews';
+import SimpleYouTubePlayer from './SimpleYouTubePlayer';
 const Classes = () => {
 
     const planData = [
@@ -61,17 +63,59 @@ const Classes = () => {
       // buttonText: "Contact Sales",
       // color: "emerald",
     },
+     {
+      id: "Premium",
+      name: "Premium",
+      description: "For premium organizations with custom needs",
+      price: 7999, // INR
+      popular: false,
+      features: [
+        { name: "Unlimited Everything", included: true },
+        { name: "Unlimited Storage", included: true },
+        { name: "Dedicated Support", included: true },
+        { name: "API Access", included: true },
+        { name: "Advanced Analytics", included: true },
+        { name: "Custom Integrations", included: true },
+        { name: "White Label", included: true },
+      ],
+      // buttonText: "Contact Sales",
+      // color: "emerald",
+    },
+    {
+      id: "Super Premium",
+      name: "Super Premium",
+      description: "For super premium organizations with custom needs",
+      price: 7999, // INR
+      popular: false,
+      features: [
+        { name: "Unlimited Everything", included: true },
+        { name: "Unlimited Storage", included: true },
+        { name: "Dedicated Support", included: true },
+        { name: "API Access", included: true },
+        { name: "Advanced Analytics", included: true },
+        { name: "Custom Integrations", included: true },
+        { name: "White Label", included: true },
+      ],
+      // buttonText: "Contact Sales",
+      // color: "emerald",
+    },
   ];
 
     return (
         <div className="m-0 p-0 overflow-x-hidden">
             <main className="m-0 p-0">
+
                 
                 {/* <HeroServices /> */}
                 <MobileScrollFadeGallery />
+                
+              
+                <SimpleYouTubePlayer url="https://www.youtube.com/watch?v=jdS9FIDAk8A" />
+             
 
                 <PricingTable plans={planData} />
                 <ContactPage />
+                <UserReviews />
 
             </main>
         </div>

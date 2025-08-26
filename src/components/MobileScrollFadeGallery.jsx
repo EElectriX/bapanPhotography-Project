@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const MobileScrollFadeGallery = () => {
-  const [imageOpacities, setImageOpacities] = useState(Array(10).fill(0));
+const GSAPScrollGallery = () => {
+  const containerRef = useRef();
   const imageRefs = useRef([]);
 
   // Sample images with descriptions
@@ -58,90 +60,123 @@ const MobileScrollFadeGallery = () => {
     }
   ];
 
-  // Unified scroll handler (same animation for all screens)
-  const handleScroll = useCallback(() => {
-    const newOpacities = imageRefs.current.map((ref) => {
-      if (!ref) return 0;
+//   useEffect(() => {
+//     // Register ScrollTrigger plugin
+//     gsap.registerPlugin(ScrollTrigger);
 
-      const rect = ref.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+//     // Set initial states for all gallery items
+//     imageRefs.current.forEach((ref, index) => {
+//       if (ref) {
+//         gsap.set(ref, { 
+//           opacity: 0, 
+//           y: 50,
+//           scale: 0.95
+//         });
+//       }
+//     });
 
-      const fadeInStart = windowHeight * 0.85;
-      const fullOpacityStart = windowHeight * 0.65;
-      const fullOpacityEnd = windowHeight * 0.35;
-      const fadeOutEnd = windowHeight * 0.15;
+//     // Create scroll animations for each gallery item
+//     imageRefs.current.forEach((ref, index) => {
+//   if (ref) {
+//     let tl = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: ref,
+//         start: "top 85%",
+//         end: "top 15%", 
+//         scrub: 1,
+//         markers: false // set to true for debugging
+//       }
+//     });
 
-      if (rect.top > windowHeight) return 0;
-      if (rect.bottom < 0) return 0;
+//     tl.fromTo(ref, 
+//       {
+//         opacity: 0,
+//         x: 50,
+//         scale: 0.95
+//       }, 
+//       {
+//         opacity: 1,
+//         x: 0,
+//         scale: 1,
+//         ease: "power4.out",  // nice smooth easing
+//         delay: index * 0.1, // stagger based on index
+//         duration: 1.5,  // takes 1s to complete once started
+//       }
+//     );
 
-      const imageTop = rect.top;
-      const imageBottom = rect.bottom;
-      const imageCenter = imageTop + rect.height / 2;
+//     // overlay animation (fades in very lightly)
+//     const overlay = ref.querySelector(".image-overlay");
+//     if (overlay) {
+//       tl.to(overlay, { opacity: 0.12, ease: "power1.out" }, "<"); 
+//       // "<" means start at same time as previous
+//     }
+//   }
+// });
 
-      let opacity = 0;
 
-      if (imageTop <= fadeInStart && imageTop > fullOpacityStart) {
-        const fadeInProgress = (fadeInStart - imageTop) / (fadeInStart - fullOpacityStart);
-        opacity = fadeInProgress < 0.5 
-          ? 2 * fadeInProgress * fadeInProgress
-          : 1 - Math.pow(-2 * fadeInProgress + 2, 2) / 2;
-      } else if (imageCenter >= fullOpacityEnd && imageCenter <= fullOpacityStart) {
-        opacity = 1;
-      } else if (imageBottom < fullOpacityEnd && imageBottom >= fadeOutEnd) {
-        const fadeOutProgress = (imageBottom - fadeOutEnd) / (fullOpacityEnd - fadeOutEnd);
-        opacity = fadeOutProgress < 0.5 
-          ? 2 * fadeOutProgress * fadeOutProgress
-          : 1 - Math.pow(-2 * fadeOutProgress + 2, 2) / 2;
-      } else if (imageTop <= fullOpacityStart && imageBottom >= fullOpacityEnd) {
-        opacity = 1;
-      }
+//     // Cleanup function
+//     return () => {
+//       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+//     };
+//   }, []);
 
-      return Math.max(0, Math.min(1, opacity));
-    });
+useEffect(() => {
+ gsap.registerPlugin(ScrollTrigger);
 
-    setImageOpacities(newOpacities);
-  }, []);
+ const triggers = [];
 
-  useEffect(() => {
-    handleScroll();
+ imageRefs.current.forEach((ref, index) => {
+   if (ref) {
+     gsap.set(ref, { 
+       opacity: 0, 
+       y: 100,
+       scale: 0.95
+     });
 
-    let ticking = false;
-    const smoothScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+     const tween = gsap.to(ref, {
+       opacity: 1,
+       y: 0,
+       scale: 1,
+       ease: "power3.out",
+       scrollTrigger: {
+         trigger: ref,
+         start: "top 90%",
+         end: "bottom 10%",
+         scrub: 3,
+         markers: false,
+         onEnter: () => gsap.to(ref, { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }),
+         onLeave: () => gsap.to(ref, { opacity: 0, y: -100, scale: 0.95, duration: 1, ease: "power3.in" }),
+         onEnterBack: () => gsap.to(ref, { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }),
+         onLeaveBack: () => gsap.to(ref, { opacity: 0, y: 100, scale: 0.95, duration: 1, ease: "power3.in" })
+       }
+     });
 
-    window.addEventListener('scroll', smoothScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+     triggers.push(tween.scrollTrigger);
+   }
+ });
 
-    return () => {
-      window.removeEventListener('scroll', smoothScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, [handleScroll]);
+ return () => {
+   triggers.forEach(trigger => trigger.kill());
+ };
+}, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 overflow-x-hidden">
-
-     {/* Animated background blobs */}
+    <div className="min-h-screen bg-gray-900 overflow-x-hidden" ref={containerRef}>
+      {/* Animated background blobs */}
       <div className="fixed inset-0 opacity-30">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-purple-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
+
       {/* Header */}
       <div className="h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 px-4">
         <div className="text-center text-white max-w-4xl">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
-            Journey Through Images
+            GSAP ScrollTrigger Gallery
           </h1>
           <p className="text-base sm:text-lg md:text-xl opacity-80 mb-8 px-4">
-            Experience smooth scroll-based animations
+            Smooth scroll-based animations powered by GSAP
           </p>
           <div className="mt-8 animate-bounce">
             <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,13 +193,7 @@ const MobileScrollFadeGallery = () => {
             <div
               key={index}
               ref={(el) => (imageRefs.current[index] = el)}
-              className="relative"
-              style={{
-                opacity: imageOpacities[index],
-                transform: `translateY(${(1 - imageOpacities[index]) * 50}px)`,
-                transition: 'none',
-                willChange: 'opacity, transform'
-              }}
+              className="gallery-item relative"
             >
               <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
                 <div className={`relative overflow-hidden rounded-lg sm:rounded-xl shadow-xl sm:shadow-2xl w-full ${
@@ -182,10 +211,10 @@ const MobileScrollFadeGallery = () => {
                     </div>
                   </div>
                   <div 
-                    className="absolute inset-0 rounded-lg sm:rounded-xl pointer-events-none"
+                    className="image-overlay absolute inset-0 rounded-lg sm:rounded-xl pointer-events-none"
                     style={{
-                      background: `linear-gradient(135deg, transparent, rgba(255,255,255,${imageOpacities[index] * 0.12}))`,
-                      opacity: imageOpacities[index]
+                      background: 'linear-gradient(135deg, transparent, rgba(255,255,255,0.12))',
+                      opacity: 0
                     }}
                   />
                 </div>
@@ -199,21 +228,42 @@ const MobileScrollFadeGallery = () => {
                   <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed">
                     {image.description}
                   </p>
-                  <div className="flex items-center space-x-3 mt-4 sm:mt-6">
-                    <div className="w-12 sm:w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300"
-                        style={{ width: `${imageOpacities[index] * 100}%` }}
-                      />
-                    </div>
-                    <span className="text-gray-400 text-xs sm:text-sm">
-                      {Math.round(imageOpacities[index] * 100)}%
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+        {/* More Images Button */}
+        <div className="flex justify-center mt-20 sm:mt-32 lg:mt-40">
+          <a 
+            href="#" 
+            className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 hover:from-purple-500 hover:via-blue-500 hover:to-indigo-500 text-white font-semibold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 ease-out"
+          >
+            {/* Animated background overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+            
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
+            
+            {/* Button content */}
+            <div className="relative flex items-center space-x-3">
+              {/* Google Drive icon */}
+              <svg className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.71 3.5L1.15 15L4.58 21L11.13 9.5M9.73 15L6.3 21H19.42L22.85 15M22.28 14L15.42 2H8.58L8.57 2L15.43 13.5"/>
+              </svg>
+              
+              <span className="text-lg font-bold tracking-wide">View More Images</span>
+              
+              {/* Arrow icon */}
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+            
+            {/* Floating particles effect */}
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping"></div>
+            <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping delay-100"></div>
+          </a>
         </div>
       </div>
 
@@ -222,4 +272,4 @@ const MobileScrollFadeGallery = () => {
   );
 };
 
-export default MobileScrollFadeGallery;
+export default GSAPScrollGallery;

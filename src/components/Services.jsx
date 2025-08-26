@@ -1,8 +1,11 @@
 import React from 'react';
-import HorizontalSlideBar from './HorizontalSlideBar';
+// import HorizontalSlideBar from './HorizontalSlideBar';
 // import HeroServices from './HeroServices';
 import ContactPage from './ContactPage';
 import PricingTable from './PricingTable';
+import ImageCarousel from './ImageCarousel';
+import UserReviews from './UserReviews';
+import TimedCardCarousel from './TimedCardCarousel';
 const Services = () => {
 
     const planData = [
@@ -67,9 +70,14 @@ const Services = () => {
             <main className="m-0 p-0">
                 
                 {/* <HeroServices /> */}
-
-                <HorizontalSlideBar />
+{/* 
+                <HorizontalSlideBar /> */}
+                <TimedCardCarousel />
+               {/* it will work porperly upto width 820px */}
+                <ImageCarousel />
                 <PricingTable plans={planData} />
+                {/* <UserReviews review={[]} /> */}
+                <UserReviews />
                 <ContactPage />
             </main>
         </div>
