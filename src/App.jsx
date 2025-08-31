@@ -25,33 +25,7 @@ function App() {
 
 
   return (
-    // <Router>
-      // <Nav/>
-
-      // <main >
-      //     // <Routes>
-      //     //   <Route path='/' element={<ThreeColumns/>}/>
-           
-      //     //   <Route path='/About' element={<Hero/>}/>
-      //     // </Routes>
-
-
-      // </main>
-
-    //   <div className="m-0 p-0 overflow-x-hidden">
-    //  <Navbar />
-    //  <main>
-    //   <Routes>
-    //      <Route path='/' element={<HomePage />}/>
-    //   </Routes>
-    //  </main>
-
-    //  <HomePage />
-    //   <ProfessionalFooter />
-    // </div>
-    // </Router>
-      
-     <Router>
+    <Router>
       <div className="m-0 p-0 overflow-x-hidden">
         <Navbar />
 

@@ -6,6 +6,7 @@ import PricingTable from './PricingTable';
 import ImageCarousel from './ImageCarousel';
 import UserReviews from './UserReviews';
 import TimedCardCarousel from './TimedCardCarousel';
+import MobileOrientationPrompt from './MobileOrientationPrompt.JSX';
 const Services = () => {
 
     const planData = [
@@ -24,8 +25,8 @@ const Services = () => {
         { name: "Custom Integrations", included: false },
         { name: "Priority Support", included: false },
       ],
-      // buttonText: "Get Started",
-      // color: "blue",
+      buttonText: "Get Started",
+      color: "blue",
     },
     {
       id: "professional",
@@ -42,8 +43,8 @@ const Services = () => {
         { name: "Custom Integrations", included: false },
         { name: "White Label", included: false },
       ],
-      // buttonText: "Start Free Trial",
-      // color: "purple",
+      buttonText: "Start Free Trial",
+      color: "purple",
     },
     {
       id: "enterprise",
@@ -60,18 +61,19 @@ const Services = () => {
         { name: "Custom Integrations", included: true },
         { name: "White Label", included: true },
       ],
-      // buttonText: "Contact Sales",
-      // color: "emerald",
+      buttonText: "Contact Sales",
+      color: "emerald",
     },
   ];
 
     return (
         <div className="m-0 p-0 overflow-x-hidden">
             <main className="m-0 p-0">
-                
-                {/* <HeroServices /> */}
-{/* 
-                <HorizontalSlideBar /> */}
+                  <div className="App">
+                  <MobileOrientationPrompt />
+                  {/* Your other content */}
+                   {/* <HeroServices /> */}
+                {/* <HorizontalSlideBar /> */}
                 <TimedCardCarousel />
                {/* it will work porperly upto width 820px */}
                 <ImageCarousel />
@@ -79,6 +81,10 @@ const Services = () => {
                 {/* <UserReviews review={[]} /> */}
                 <UserReviews />
                 <ContactPage />
+                </div>
+
+                
+               
             </main>
         </div>
     );
