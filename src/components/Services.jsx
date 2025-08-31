@@ -6,7 +6,7 @@ import PricingTable from './PricingTable';
 import ImageCarousel from './ImageCarousel';
 import UserReviews from './UserReviews';
 import TimedCardCarousel from './TimedCardCarousel';
-import MobileOrientationPrompt from './MobileOrientationPrompt.JSX';
+import MobileRotation from './MobileRotation';
 const Services = () => {
 
     const planData = [
@@ -70,7 +70,7 @@ const Services = () => {
         <div className="m-0 p-0 overflow-x-hidden">
             <main className="m-0 p-0">
                   <div className="App">
-                  <MobileOrientationPrompt />
+                  <MobileRotation />
                   {/* Your other content */}
                    {/* <HeroServices /> */}
                 {/* <HorizontalSlideBar /> */}

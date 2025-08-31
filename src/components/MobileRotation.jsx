@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const MobileOrientationPrompt = () => {
+const MobileRotation = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isPortrait, setIsPortrait] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
@@ -56,4 +56,4 @@ const MobileOrientationPrompt = () => {
   );
 };
 
-export default MobileOrientationPrompt;
+export default MobileRotation;
