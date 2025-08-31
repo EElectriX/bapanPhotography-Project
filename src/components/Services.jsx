@@ -69,7 +69,7 @@ const Services = () => {
     return (
         <div className="m-0 p-0 overflow-x-hidden">
             <main className="m-0 p-0">
-                  <div className="App">
+                  <div >
                   <MobileRotation />
                   {/* Your other content */}
                    {/* <HeroServices /> */}
